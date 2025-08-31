@@ -357,7 +357,8 @@ const handleLogout = async () => {
                     <p className="text-sm font-semibold text-gray-900">{user.email}</p>
                     {clientData && (
                       <>
-                      <p className="text-xs text-purple-600 font-medium">{clientData.plan_name} Plan</p>
+                      <p className="text-xs text-purple-600 font-medium">Demo Account</p>
+                      {/* <p className="text-xs text-purple-600 font-medium">{clientData.plan_name} Plan</p> */}
                      
                       </>
                     )}
@@ -366,7 +367,7 @@ const handleLogout = async () => {
                        onClick={() => { setCurrentView('pricing'); setSideMenuOpen(false); }}
                        className="text-xs text-blue-600 font-medium hover:underline"
                      >
-                       Manage Plan
+                       Upgrade Plan ⭐️
                      </button>
                    )}
                   </div>
