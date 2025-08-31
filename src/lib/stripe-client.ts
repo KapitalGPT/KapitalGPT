@@ -4,10 +4,15 @@ const stripePromise = loadStripe('pk_live_51Qi5zUE1f3uMNweGm5I6uX9kelbMdiyvjsqmk
 
 export { stripePromise };
 
+// export const STRIPE_PRICES = { 
+//   SELF_EMPLOYED: 'price_1Ry8uJE1f3uMNweGPcQkLASi',
+//   ENTREPRENEUR: 'price_1Ry9huE1f3uMNweGNsoCcMAw',
+//   MOGUL: 'price_1Ry8uJE1f3uMNweGPcQkLASi',
+// };
 export const STRIPE_PRICES = { 
-  SELF_EMPLOYED: 'price_1Ry8uJE1f3uMNweGPcQkLASi',
-  ENTREPRENEUR: 'price_1Ry9huE1f3uMNweGNsoCcMAw',
-  MOGUL: 'price_1Ry8uJE1f3uMNweGPcQkLASi',
+  SELF_EMPLOYED: 'price_1S1vweK2u3gppvK2BHzQCteM',
+  ENTREPRENEUR: 'price_1S1w07K2u3gppvK2JHnV5b5O',
+  MOGUL: 'price_1S1w0uK2u3gppvK2Sw7Uyzky',
 };
 
 export const PRICING_PLANS = [
@@ -15,16 +20,16 @@ export const PRICING_PLANS = [
     id: 'self-employed',
     name: 'Self Employed',
     price: 0,
-    priceId: null,
-    description: 'Daily Pay as you Go',
+    priceId: STRIPE_PRICES.SELF_EMPLOYED,
+    description: 'Demo Account',
     features: [
-      '100 Daily AI Text Phone Messages',
-      '60 Minutes of AI Cold Calling',
-      'Estimated 40 AI Cold Calls',
-      '1 Daily Investor Match',
+      'Demo AI Text Phone Messages',
+      'Demo AI Cold Calling',
+      'Demo For AI Cold Calls',
+      'Demo Investor Match',
       'Investor CRM + Calendar Integration',
       'AI Customer Support',
-      'Twilio + HubSpot Integration',
+      'Twilio',
       'WhatsApp + Facebook Integration'
     ],
     popular: false,
@@ -42,7 +47,7 @@ export const PRICING_PLANS = [
       '50 Weekly Investor Matches',
       'Investor CRM + Calendar Integration',
       'Human Customer Support',
-      'Twilio + HubSpot Integration',
+      'Twilio',
       'WhatsApp + Facebook Integration'
     ],
     popular: true,
@@ -60,7 +65,7 @@ export const PRICING_PLANS = [
       '100 Weekly Investor Matches',
       'Investor CRM + Calendar Integration',
       'Human Customer Support',
-      'Twilio + HubSpot Integration',
+      'Twilio',
       'WhatsApp + Facebook Integration'
     ],
     popular: false,

@@ -48,17 +48,47 @@ const fetchClientData = async (userEmail: string) => {
 
 
   useEffect(() => {
-    const currentCount = parseInt(localStorage.getItem('visitorCount') || '0', 10);
-    const newCount = currentCount + 1;
-    localStorage.setItem('visitorCount', newCount.toString());
-    setVisitorCount(newCount);
-
      if (user?.email) {
     fetchClientData(user.email);
   } else {
     setClientData(null);
   }
-    
+
+    const hasVisited = sessionStorage.getItem('hasVisited');
+    async function incrementVisitorCount() {
+      await supabase.rpc('increment_visitor_count');
+    }
+
+    async function fetchVisitorCountFromDB() {
+      const { data, error } = await supabase
+        .from('visitor_stats')
+        .select('count')
+        .eq('id', 1)
+        .single();
+      if (!error && data) setVisitorCount(data.count);
+    }
+
+    if (!hasVisited) {
+      incrementVisitorCount().then(fetchVisitorCountFromDB);
+      sessionStorage.setItem('hasVisited', 'true');
+    } else {
+      fetchVisitorCountFromDB();
+    }
+
+    const channel = supabase
+      .channel('public:visitor_stats')
+      .on(
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'visitor_stats' },
+        (payload) => {
+          setVisitorCount(payload.new.count);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [user]);
 
 
@@ -71,8 +101,6 @@ const handleOpenSignupModal = () => {
   setLoginModalOpen(false);
   setSignupModalOpen(true);
 };
-
-
 
 const handleLogout = async () => {
   await signOut()

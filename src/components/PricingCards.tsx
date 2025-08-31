@@ -27,7 +27,7 @@ export function PricingCards({ onPlanSelect, onPaymentSuccessNavigate, user }: P
   };
 
   const formatPrice = (cents: number) => {
-    if (cents === 0) return 'FREE';
+    if (cents === 0) return '$0.00';
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -129,14 +129,14 @@ export function PricingCards({ onPlanSelect, onPaymentSuccessNavigate, user }: P
 
               <button
                 onClick={() => handlePlanSelect(plan.id)}
-                disabled={plan.price === 0}
+                disabled={true}
                 className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors disabled:cursor-not-allowed ${
                   plan.popular
                     ? 'bg-purple-600 text-white hover:bg-purple-700'
                     : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                 }`}
               >
-                {plan.price === 0 ? 'Current Plan' : 'Choose Plan'}
+                {plan.price === 0 ? 'Current Plan' : 'Coming Soon!'}
               </button>
             </div>
           );

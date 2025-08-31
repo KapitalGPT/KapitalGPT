@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TrendingUp, Star, Heart, Mail, Globe, Building, Filter, Search, Eye, Plus, ArrowRight, XCircle, LayoutDashboard } from 'lucide-react';
+import { useUser } from '../context';
 
 type View = 'home' | 'funding' | 'investor' | 'crm' | 'pricing' | 'outreach' | 'dashboard' | 'help-center';
 
@@ -75,6 +76,7 @@ export function Dashboard({ onBack, onNavigate, user, clientData, setLoginModalO
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStage, setSelectedStage] = useState('');
   const [selectedIndustry, setSelectedIndustry] = useState('');
+  const { userSubscribed } = useUser();
 
   // const favoriteInvestors = investors.filter(investor => investor.isFavorite);
   const potentialInvestors = investors.filter(investor => !investor.isFavorite);
@@ -136,7 +138,12 @@ export function Dashboard({ onBack, onNavigate, user, clientData, setLoginModalO
 
 const handleOutreachCampaign = () => {
   setFavoriteInvestors(favoriteInvestors);
-  onNavigate('outreach');
+  // onNavigate('outreach');
+  if (userSubscribed === true) {
+    onNavigate('outreach');
+  }else { 
+    onNavigate('pricing');
+  }
 }
 
   return (

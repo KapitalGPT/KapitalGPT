@@ -41,7 +41,8 @@ serve(async (req) => {
     }
 
     // Construct the success and cancel URLs dynamically based on the request origin
-    const origin = req.headers.get('origin') || 'http://localhost:5173'
+    const origin = 'http://localhost:5173'
+    // const origin = req.headers.get('origin') || 'http://localhost:5173'
     const successUrl = `${origin}/payment-success?session_id={CHECKOUT_SESSION_ID}`
     const cancelUrl = `${origin}/pricing`
 
