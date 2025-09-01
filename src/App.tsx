@@ -15,8 +15,10 @@ import { UserProvider } from './context/UserContext';
 import { SignupModal } from './components/SignupModal';
 import { useUser } from './context/useUser';
 import { supabase } from './lib/supabaseClient';
+import { useNavigate } from 'react-router-dom';
 
-type View = 'home' | 'funding' | 'investor' | 'crm' | 'pricing' | 'outreach' | 'dashboard' | 'help-center' | 'signup';
+
+type View = 'home' | 'funding' | 'investor' | 'crm' | 'pricing' | 'outreach' | 'dashboard' | 'help-center' | 'signup' | 're';
 
 function AppContent() {
   const [currentView, setCurrentView] = useState<View>('home');
@@ -29,7 +31,8 @@ function AppContent() {
   const [favoriteInvestors, setFavoriteInvestors] = useState<any[]>([]);
   const [clientData, setClientData] = useState<any>(null);
   const [isCancelling, setIsCancelling] = useState(false);
-  const { user, signOut, totalUsersCount, plan } = useUser();
+  const { user, signOut, totalUsersCount, plan } = useUser()
+  const navigate = useNavigate();
 
 const fetchClientData = async (userEmail: string) => {
   const { data, error } = await supabase
@@ -45,6 +48,7 @@ const fetchClientData = async (userEmail: string) => {
     setClientData(data);
   }
 };
+
 
 
   useEffect(() => {
@@ -191,8 +195,9 @@ const handleLogout = async () => {
           <nav className="hidden md:flex items-center space-x-6">
             <div className="flex items-center space-x-4">
               <button
-                onClick={() => setVoiceAgentOpen(true)}
-                className="flex items-center space-x-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+                disabled={!user?.aud}
+                onClick={() => navigate('/retell-call-agent')}
+                className="flex items-center space-x-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Phone className="w-4 h-4" />
                 <span className="text-sm font-medium">Test AI Cold Call</span>
@@ -577,8 +582,8 @@ const renderCurrentView = () => {
 
 export default function App() {
   return (
-    <UserProvider>
+
       <AppContent />
-    </UserProvider>
+
   );
 }
