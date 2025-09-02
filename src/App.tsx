@@ -196,7 +196,7 @@ const handleLogout = async () => {
             <div className="flex items-center space-x-4">
               <button
                 disabled={!user?.aud}
-                onClick={() => navigate('/retell-call-agent')}
+                onClick={() => navigate('/kapital-ai')}
                 className="flex items-center space-x-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Phone className="w-4 h-4" />

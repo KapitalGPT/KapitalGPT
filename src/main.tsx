@@ -21,7 +21,7 @@ createRoot(document.getElementById('root')!).render(
 
           <Route
             element={<RetellCallAgentPage />}
-            path="/retell-call-agent"
+            path="/kapital-ai"
           />
           <Route
             path="*"
